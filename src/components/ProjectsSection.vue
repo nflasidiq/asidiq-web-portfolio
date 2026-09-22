@@ -59,7 +59,7 @@ const filteredProjects = () => {
 </script>
 
 <template>
-  <section id="projects" class="py-24 px-4 sm:px-6 relative">
+  <section id="projects" class="py-16 px-4 sm:px-6 relative">
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="flex flex-col items-center text-center mb-12">

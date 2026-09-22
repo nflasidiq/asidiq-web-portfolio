@@ -38,7 +38,7 @@ const skillCategories = [
 </script>
 
 <template>
-  <section id="skills" class="py-24 px-4 sm:px-6 relative bg-slate-950/40">
+  <section id="skills" class="py-16 px-4 sm:px-6 relative bg-slate-950/40">
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="flex flex-col items-center text-center mb-16">

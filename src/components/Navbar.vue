@@ -1,27 +1,27 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from "vue";
 
-const isScrolled = ref(false)
-const isMobileMenuOpen = ref(false)
+const isScrolled = ref(false);
+const isMobileMenuOpen = ref(false);
 
 const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
-]
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+];
 
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 20
-}
+  isScrolled.value = window.scrollY > 20;
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener("scroll", handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
@@ -30,22 +30,30 @@ onUnmounted(() => {
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       isScrolled
         ? 'bg-slate-950/85 backdrop-blur-md border-b border-emerald-900/30 py-3 shadow-lg shadow-black/20'
-        : 'bg-transparent py-5'
+        : 'bg-transparent py-5',
     ]"
   >
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+    <div
+      class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between"
+    >
       <!-- Logo / Brand -->
       <a href="#" class="flex items-center gap-2 group">
-        <span class="w-9 h-9 rounded-xl bg-linear-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center font-bold text-slate-950 text-base shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-          AS
+        <span
+          class="w-9 h-9 rounded-xl bg-linear-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center font-bold text-slate-950 text-base shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform"
+        >
+          NA
         </span>
-        <span class="text-slate-100 font-semibold text-lg tracking-tight group-hover:text-emerald-400 transition-colors">
-          asidiq<span class="text-emerald-400">.dev</span>
+        <span
+          class="text-slate-100 font-semibold text-lg tracking-tight group-hover:text-emerald-400 transition-colors"
+        >
+          Naufal<span class="text-emerald-400"> Asidiq</span>
         </span>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 border border-slate-800/80 px-4 py-1.5 rounded-full backdrop-blur-sm">
+      <nav
+        class="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full backdrop-blur-sm"
+      >
         <a
           v-for="link in navLinks"
           :key="link.name"
@@ -58,8 +66,12 @@ onUnmounted(() => {
 
       <!-- CTA & Status -->
       <div class="hidden md:flex items-center gap-3">
-        <div class="flex items-center gap-2 text-xs font-medium text-emerald-300 bg-emerald-950/50 border border-emerald-800/40 px-3 py-1.5 rounded-full">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div
+          class="flex items-center gap-2 text-xs font-medium text-emerald-300 bg-emerald-950/50 border border-emerald-800/40 px-3 py-1.5 rounded-full"
+        >
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+          ></span>
           <span>Available for hire</span>
         </div>
         <a
@@ -77,11 +89,33 @@ onUnmounted(() => {
         class="md:hidden p-2 rounded-lg text-slate-400 hover:text-emerald-400 hover:bg-slate-900 border border-slate-800 transition-colors"
         aria-label="Toggle menu"
       >
-        <svg v-if="!isMobileMenuOpen" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <svg
+          v-if="!isMobileMenuOpen"
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
-        <svg v-else class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <svg
+          v-else
+          class="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
       </button>
     </div>
@@ -102,8 +136,12 @@ onUnmounted(() => {
           {{ link.name }}
         </a>
         <div class="pt-3 border-t border-slate-800 flex flex-col gap-3">
-          <div class="flex items-center gap-2 text-xs font-medium text-emerald-300 bg-emerald-950/40 border border-emerald-800/40 px-3 py-2 rounded-lg">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div
+            class="flex items-center gap-2 text-xs font-medium text-emerald-300 bg-emerald-950/40 border border-emerald-800/40 px-3 py-2 rounded-lg"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+            ></span>
             <span>Available for hire</span>
           </div>
           <a

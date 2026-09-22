@@ -35,7 +35,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <section id="contact" class="py-24 px-4 sm:px-6 relative bg-slate-950/60">
+  <section id="contact" class="py-16 px-4 sm:px-6 relative bg-slate-950/60">
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="flex flex-col items-center text-center mb-16">
