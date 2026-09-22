@@ -5,6 +5,7 @@ const skillCategories = [
     description:
       "Membangun antarmuka modern berbasis komponen dan menerapkan struktur HTML yang semantik.",
     skills: [
+      { name: "Electron.js", level: "Basic" },
       { name: "HTML5 & CSS3", level: "Intermediate" },
       { name: "Tailwind CSS", level: "Intermediate" },
       { name: "Responsive Web Design", level: "Intermediate" },
