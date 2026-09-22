@@ -5,8 +5,8 @@ const projects = [
     title: "Rebuild Web System - Telkom Test House",
     category: "Web Apps",
     desc: "Proyek nyata skala perusahaan saat magang di PT AKSII. Bertanggung jawab atas optimasi antarmuka, error handling, serta pembuatan fitur baru pelacakan data riwayat kalibrasi.",
-    tags: ["Vue.js", "Tailwind CSS", "JavaScript", "UI Slicing"],
-    impact: "100% Responsive Layout & Secured Session Timeout Control",
+    tags: ["Vue.js", "Tailwind CSS", "JavaScript", "UI Slicing", "REST API Integration"],
+    impact: "Responsive Desktop & Mobile Interface",
     featured: false,
   },
   {
@@ -14,8 +14,8 @@ const projects = [
     title: "Dasbor Admin Ride-Hailing - Pemuda Express",
     category: "Web Apps",
     desc: "Sistem dasbor internal untuk otomatisasi alur kerja admin, manajemen data transaksi, dan pemantauan aktivitas mitra driver secara real-time (Tugas Akhir Kuliah).",
-    tags: ["React.js", "Tailwind CSS", "REST API Integration"],
-    impact: "Automated Workflow for Order Recapitulation",
+    tags: ["React.js", "Tailwind CSS", "UI Slicing"],
+    impact: "Admin Dashboard for Operational Management",
     featured: false,
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     category: "Desktop Apps",
     desc: "Aplikasi produktivitas desktop berbasis Windows untuk menggabungkan fungsi manajemen daftar tugas (to-do list) dan catatan teks biasa secara simultan dalam satu file.",
     tags: ["Electron.js", "JavaScript", "AI-Assisted Development"],
-    impact: "Solved Personal Daily Task Efficiency Constraint",
+    impact: "Integrated Notes & Task Management",
     featured: false,
   },
 ];
@@ -52,11 +52,11 @@ const projects = [
       </div>
 
       <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="flex flex-wrap justify-center gap-8">
         <div
           v-for="project in projects"
           :key="project.id"
-          class="bg-slate-900/40 hover:bg-slate-900/70 border border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 shadow-lg shadow-black/20"
+          class="w-full md:w-[calc(50%-1rem)] bg-slate-900/40 hover:bg-slate-900/70 border border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 shadow-lg shadow-black/20"
         >
           <div>
             <!-- Card Top Bar -->
@@ -65,12 +65,6 @@ const projects = [
                 class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300"
               >
                 {{ project.category }}
-              </span>
-              <span
-                v-if="project.featured"
-                class="text-[11px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-0.5 rounded-full flex items-center gap-1"
-              >
-                ★ Featured
               </span>
             </div>
 
