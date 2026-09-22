@@ -1,8 +1,8 @@
 <script setup>
 const stats = [
-  { label: "Politeknik Negeri Bandung", value: "IPK 3.63/4.00" },
-  { label: "Telkom Test House Intern", value: "Enterprise Project" },
-  { label: "Clean & Modular", value: "Code" },
+  { label: "D3 Teknik Informatika", value: "IPK 3.63" },
+  { label: "Magang Profesional", value: "4 Bulan" },
+  { label: "Built & Delivered", value: "3+ Projects" },
 ];
 
 const techStack = [

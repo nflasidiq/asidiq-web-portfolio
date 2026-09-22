@@ -5,6 +5,7 @@ const isScrolled = ref(false);
 const isMobileMenuOpen = ref(false);
 
 const navLinks = [
+  { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
@@ -78,7 +79,7 @@ onUnmounted(() => {
           href="#contact"
           class="text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2 rounded-xl transition-all shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5"
         >
-          Let's Talk
+          Let's Connect
         </a>
       </div>
 
