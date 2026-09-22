@@ -38,6 +38,10 @@ const keyStrengths = [
         >
           About <span class="text-emerald-400">My Background</span>
         </h2>
+        <p class="mt-4 text-slate-400 max-w-2xl text-sm sm:text-base">
+          Mengenal latar belakang, pengalaman, dan pendekatan saya dalam
+          membangun aplikasi web yang nyaman digunakan.
+        </p>
       </div>
 
       <!-- Bio Card & Overview -->
