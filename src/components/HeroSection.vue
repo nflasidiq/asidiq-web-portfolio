@@ -13,6 +13,22 @@ const techStack = [
   "JavaScript",
   "Git",
 ];
+
+// Path ke file CV
+const cvPath = "/cv/CV-Frontend Developer-Naufal Asidiq.pdf";
+
+const downloadAndOpenCV = () => {
+  // 1. Buka CV di tab baru
+  window.open(cvPath, "_blank");
+
+  // 2. Otomatis trigger download
+  const link = document.createElement("a");
+  link.href = cvPath;
+  link.download = "CV-Frontend Developer-Naufal Asidiq.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 </script>
 
 <template>
@@ -64,9 +80,10 @@ const techStack = [
           <span>View Featured Projects</span>
         </a>
 
-        <a
-          href="#contact"
-          class="inline-flex items-center gap-2 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-emerald-400 border border-slate-700/80 hover:border-emerald-500/50 font-semibold px-6 py-3.5 rounded-xl transition-all text-sm sm:text-base"
+        <button
+          type="button"
+          @click="downloadAndOpenCV"
+          class="inline-flex items-center gap-2 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-emerald-400 border border-slate-700/80 hover:border-emerald-500/50 font-semibold px-6 py-3.5 rounded-xl transition-all text-sm sm:text-base cursor-pointer"
         >
           <svg
             class="w-4 h-4 text-emerald-400"
@@ -82,7 +99,7 @@ const techStack = [
             />
           </svg>
           <span>Download CV / Resume</span>
-        </a>
+        </button>
       </div>
 
       <!-- Quick Metrics for HR -->
