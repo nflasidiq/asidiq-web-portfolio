@@ -10,7 +10,15 @@ const projects = [
     tags: ["Vue.js", "Tailwind CSS", "JavaScript", "UI Slicing"],
     impact: "100% Responsive Layout & Secured Session Timeout Control",
     featured: false,
-    image: "/projects/TTH/Portfolio FE.png",
+    // Gunakan array 'images' untuk menyimpan banyak gambar
+    images: [
+      "/projects/TTH/Portfolio FE.png",
+      "/projects/TTH/Portfolio FE (1).png",
+      "/projects/TTH/Portfolio FE (2).png",
+      "/projects/TTH/Portfolio FE (3).png",
+      "/projects/TTH/Portfolio FE (4).png",
+      "/projects/TTH/Portfolio FE (5).png",
+    ],
   },
   {
     id: 2,
@@ -20,7 +28,12 @@ const projects = [
     tags: ["React.js", "Tailwind CSS", "REST API Integration"],
     impact: "Automated Workflow for Order Recapitulation",
     featured: false,
-    image: "/projects/PE/Portfolio FE.png",
+    images: [
+      "/projects/PE/Portfolio FE.png",
+      "/projects/PE/Portfolio FE (1).png",
+      "/projects/PE/Portfolio FE (2).png",
+      "/projects/PE/Portfolio FE (3).png",
+    ],
   },
   {
     id: 3,
@@ -30,16 +43,23 @@ const projects = [
     tags: ["Electron.js", "JavaScript", "AI-Assisted Development"],
     impact: "Solved Personal Daily Task Efficiency Constraint",
     featured: false,
-    image: "/projects/TL/Portfolio FE.png",
+    images: [
+      "/projects/TL/Portfolio FE.png",
+      "/projects/TL/Portfolio FE (1).png",
+      "/projects/TL/Portfolio FE (2).png",
+    ],
   },
 ];
 
-// Logika untuk Modal (Pop-up Gambar)
-const selectedImage = ref(null);
+// Logika untuk Modal (Slider Gambar)
+const selectedImages = ref([]);
+const currentIndex = ref(0);
 const isModalOpen = ref(false);
 
-const openModal = (imagePath) => {
-  selectedImage.value = imagePath;
+const openModal = (images) => {
+  if (!images || images.length === 0) return;
+  selectedImages.value = images;
+  currentIndex.value = 0;
   isModalOpen.value = true;
   document.body.style.overflow = "hidden"; // Cegah scroll saat modal terbuka
 };
@@ -47,18 +67,39 @@ const openModal = (imagePath) => {
 const closeModal = () => {
   isModalOpen.value = false;
   setTimeout(() => {
-    selectedImage.value = null;
+    selectedImages.value = [];
+    currentIndex.value = 0;
   }, 300); // Tunggu animasi transisi selesai
   document.body.style.overflow = "auto";
 };
 
-// Menutup modal dengan tombol 'Escape'
+// Logika Ganti Gambar
+const nextImage = () => {
+  if (currentIndex.value < selectedImages.value.length - 1) {
+    currentIndex.value++;
+  } else {
+    currentIndex.value = 0; // Balik ke gambar pertama jika sudah di akhir
+  }
+};
+
+const prevImage = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--;
+  } else {
+    currentIndex.value = selectedImages.value.length - 1; // Balik ke akhir jika di awal
+  }
+};
+
+// Kontrol lewat Keyboard (Kiri, Kanan, Escape)
 onMounted(() => {
   const handleKeydown = (e) => {
-    if (e.key === 'Escape' && isModalOpen.value) closeModal();
+    if (!isModalOpen.value) return;
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
   };
-  window.addEventListener('keydown', handleKeydown);
-  onUnmounted(() => window.removeEventListener('keydown', handleKeydown));
+  window.addEventListener("keydown", handleKeydown);
+  onUnmounted(() => window.removeEventListener("keydown", handleKeydown));
 });
 </script>
 
@@ -67,10 +108,14 @@ onMounted(() => {
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="flex flex-col items-center text-center mb-10">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-3.5 py-1 rounded-full mb-3">
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-3.5 py-1 rounded-full mb-3"
+        >
           Featured Work
         </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight"
+        >
           Recent <span class="text-emerald-400">Projects</span>
         </h2>
         <p class="mt-4 text-slate-400 max-w-2xl text-sm sm:text-base">
@@ -87,21 +132,58 @@ onMounted(() => {
           class="w-full md:w-[calc(50%-1rem)] bg-slate-900/40 hover:bg-slate-900/70 border border-slate-800/90 hover:border-emerald-500/50 rounded-2xl flex flex-col transition-all duration-300 group hover:-translate-y-1 shadow-lg shadow-black/20 overflow-hidden"
         >
           <!-- Thumbnail Image (Clickable) -->
-          <div 
-            class="relative w-full aspect-video overflow-hidden cursor-pointer border-b border-slate-800/80"
-            @click="openModal(project.image)"
+          <!-- Hanya menampilkan gambar pertama (index 0) di kartu -->
+          <div
+            class="relative w-full aspect-video overflow-hidden cursor-pointer border-b border-slate-800/80 bg-slate-950"
+            @click="openModal(project.images)"
           >
-            <!-- Gambar Project -->
-            <img 
-              :src="project.image" 
+            <!-- Gambar Project (Thumbnail) -->
+            <img
+              :src="project.images[0]"
               :alt="project.title"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
+
+            <!-- Indikator Banyak Gambar -->
+            <div
+              v-if="project.images.length > 1"
+              class="absolute top-3 right-3 bg-slate-950/80 text-emerald-400 text-[10px] font-bold px-2 py-1 rounded-md backdrop-blur-sm border border-emerald-900/50 flex items-center gap-1"
+            >
+              <svg
+                class="w-3 h-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <span>+{{ project.images.length - 1 }}</span>
+            </div>
+
             <!-- Overlay Hover (Icon Kaca Pembesar) -->
-            <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-              <div class="bg-emerald-500 text-slate-950 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            <div
+              class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]"
+            >
+              <div
+                class="bg-emerald-500 text-slate-950 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg shadow-emerald-500/20"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                  />
                 </svg>
               </div>
             </div>
@@ -111,18 +193,16 @@ onMounted(() => {
           <div class="p-6 sm:p-7 flex flex-col grow">
             <!-- Card Top Bar -->
             <div class="flex items-center justify-between gap-2 mb-4">
-              <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">
-                {{ project.category }}
-              </span>
               <span
-                v-if="project.featured"
-                class="text-[11px] font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-0.5 rounded-full flex items-center gap-1"
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300"
               >
-                ★ Featured
+                {{ project.category }}
               </span>
             </div>
 
-            <h3 class="text-xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors mb-2">
+            <h3
+              class="text-xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors mb-2"
+            >
               {{ project.title }}
             </h3>
 
@@ -131,9 +211,21 @@ onMounted(() => {
             </p>
 
             <!-- Impact Metric for HR -->
-            <div class="flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-950/30 border border-emerald-900/30 px-3 py-1.5 rounded-lg mb-6">
-              <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            <div
+              class="flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-950/30 border border-emerald-900/30 px-3 py-1.5 rounded-lg mb-6"
+            >
+              <svg
+                class="w-4 h-4 text-emerald-400 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
               </svg>
               <span>{{ project.impact }}</span>
             </div>
@@ -153,7 +245,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- Modal Lightbox (Layar Penuh) -->
+    <!-- Modal Lightbox dengan Slider -->
     <transition
       enter-active-class="transition-opacity duration-300 ease-out"
       enter-from-class="opacity-0"
@@ -162,33 +254,114 @@ onMounted(() => {
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div 
-        v-if="isModalOpen" 
-        class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 bg-slate-950/90 backdrop-blur-sm"
+      <div
+        v-if="isModalOpen"
+        class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 bg-slate-950/95 backdrop-blur-md"
         @click="closeModal"
       >
         <!-- Tombol Close -->
-        <button 
+        <button
           @click.stop="closeModal"
-          class="absolute top-6 right-6 sm:top-8 sm:right-8 p-2 rounded-full bg-slate-800 text-slate-300 hover:text-emerald-400 hover:bg-slate-700 transition-colors"
+          class="absolute cursor-pointer top-6 right-6 sm:top-8 sm:right-8 p-2 rounded-full bg-slate-800 text-slate-300 hover:text-emerald-400 hover:bg-slate-700 transition-colors z-50"
         >
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
-        <!-- Container Gambar (Klik di gambar tidak akan menutup modal) -->
-        <div 
-          class="relative max-w-5xl w-full max-h-[85vh] rounded-xl overflow-hidden shadow-2xl border border-slate-700/50"
+        <!-- Container Gambar Slider -->
+        <div
+          class="relative max-w-3xl w-full flex items-center justify-center h-full"
           @click.stop
         >
-          <img 
-            :src="selectedImage" 
-            alt="Full Project Screenshot"
-            class="w-full h-full object-contain bg-slate-900"
-          />
+          <!-- Tombol Prev (Kiri) -->
+          <button
+            v-if="selectedImages.length > 1"
+            @click="prevImage"
+            class="absolute cursor-pointer left-0 sm:left-4 p-2 sm:p-3 rounded-full bg-slate-900/80 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 transition-colors border border-slate-700/50 backdrop-blur-sm z-50 shadow-lg shadow-black/50"
+          >
+            <svg
+              class="w-6 h-6 sm:w-5 sm:h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Gambar yang Sedang Aktif -->
+          <div
+            class="w-full max-h-[85vh] flex items-center justify-center rounded-xl overflow-hidden shadow-2xl border border-slate-700/30"
+          >
+            <!-- Gunakan :key agar transisi trigger saat index berubah -->
+            <transition name="fade" mode="out-in">
+              <img
+                :key="currentIndex"
+                :src="selectedImages[currentIndex]"
+                alt="Project Screenshot Detail"
+                class="max-w-full max-h-[85vh] object-contain bg-slate-900/50"
+              />
+            </transition>
+          </div>
+
+          <!-- Tombol Next (Kanan) -->
+          <button
+            v-if="selectedImages.length > 1"
+            @click="nextImage"
+            class="absolute cursor-pointer right-0 sm:right-4 p-2 sm:p-3 rounded-full bg-slate-900/80 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 transition-colors border border-slate-700/50 backdrop-blur-sm z-50 shadow-lg shadow-black/50"
+          >
+            <svg
+              class="w-6 h-6 sm:w-5 sm:h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          <!-- Indikator Angka (Counter) -->
+          <div
+            v-if="selectedImages.length > 1"
+            class="absolute bottom-4 sm:bottom-0 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm text-slate-300 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full border border-slate-700/50 shadow-lg"
+          >
+            {{ currentIndex + 1 }} / {{ selectedImages.length }}
+          </div>
         </div>
       </div>
     </transition>
   </section>
 </template>
+
+<style scoped>
+/* Transisi untuk ganti gambar agar halus */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
