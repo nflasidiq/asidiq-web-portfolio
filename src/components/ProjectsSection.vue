@@ -10,28 +10,27 @@ const projects = [
     tags: ["Vue.js", "Tailwind CSS", "JavaScript", "UI Slicing"],
     impact: "100% Responsive Layout & Secured Session Timeout Control",
     featured: false,
-    // Path gambar (nanti ganti dengan path di folder public)
-    image: "https://placehold.co/800x500/0f172a/34d399?text=Screenshot+Telkom+Test+House",
+    image: "/projects/TTH/Portfolio FE.png",
   },
   {
     id: 2,
     title: "Dasbor Admin Ride-Hailing - Pemuda Express",
-    category: "Fullstack",
+    category: "Web Apps",
     desc: "Sistem dasbor internal untuk otomatisasi alur kerja admin, manajemen data transaksi, dan pemantauan aktivitas mitra driver secara real-time (Tugas Akhir Kuliah).",
     tags: ["React.js", "Tailwind CSS", "REST API Integration"],
     impact: "Automated Workflow for Order Recapitulation",
     featured: false,
-    image: "https://placehold.co/800x500/0f172a/34d399?text=Screenshot+Dasbor+Pemuda+Express",
+    image: "/projects/PE/Portfolio FE.png",
   },
   {
     id: 3,
     title: "To-List-an (Tulisan) - Desktop Productivity App",
-    category: "Web Apps",
+    category: "Desktop Apps",
     desc: "Aplikasi produktivitas desktop berbasis Windows untuk menggabungkan fungsi manajemen daftar tugas (to-do list) dan catatan teks biasa secara simultan dalam satu file.",
     tags: ["Electron.js", "JavaScript", "AI-Assisted Development"],
     impact: "Solved Personal Daily Task Efficiency Constraint",
     featured: false,
-    image: "https://placehold.co/800x500/0f172a/34d399?text=Screenshot+To-List-an",
+    image: "/projects/TL/Portfolio FE.png",
   },
 ];
 
@@ -109,7 +108,7 @@ onMounted(() => {
           </div>
 
           <!-- Card Content -->
-          <div class="p-6 sm:p-7 flex flex-col flex-grow">
+          <div class="p-6 sm:p-7 flex flex-col grow">
             <!-- Card Top Bar -->
             <div class="flex items-center justify-between gap-2 mb-4">
               <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">
@@ -127,7 +126,7 @@ onMounted(() => {
               {{ project.title }}
             </h3>
 
-            <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+            <p class="text-slate-400 text-sm leading-relaxed mb-4 grow">
               {{ project.desc }}
             </p>
 
@@ -165,7 +164,7 @@ onMounted(() => {
     >
       <div 
         v-if="isModalOpen" 
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-slate-950/90 backdrop-blur-sm"
+        class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 bg-slate-950/90 backdrop-blur-sm"
         @click="closeModal"
       >
         <!-- Tombol Close -->
