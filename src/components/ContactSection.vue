@@ -59,7 +59,7 @@ const socialLinks = [
               class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-2xl overflow-hidden border-2 border-emerald-500/30 shadow-2xl shadow-emerald-500/10"
             >
               <img
-                src="/public/profile.jpeg"
+                src="/profile.jpeg"
                 alt="Naufal Asidiq - Profile Photo"
                 class="w-full h-full object-cover"
               />
