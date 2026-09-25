@@ -22,7 +22,7 @@ const scrollToTop = () => {
         >
       </div>
 
-      <p class="text-slate-500">
+      <p class="text-slate-500 text-center sm:text-left">
         © {{ new Date().getFullYear() }} Naufal Asidiq. Built with Vue.js &
         Tailwind CSS. All Rights Reserved.
       </p>

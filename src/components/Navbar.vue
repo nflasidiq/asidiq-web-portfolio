@@ -150,7 +150,7 @@ onUnmounted(() => {
             @click="isMobileMenuOpen = false"
             class="text-center text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 py-2.5 rounded-xl transition-colors"
           >
-            Let's Talk
+            Let's Connect
           </a>
         </div>
       </div>

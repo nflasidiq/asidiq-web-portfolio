@@ -87,7 +87,7 @@ const keyStrengths = [
 
           <!-- Quick facts for HR -->
           <div
-            class="mt-2 pt-6 border-t border-slate-800 flex flex-col gap-2.5 text-sm"
+            class="mt-2 pt-6 border-t border-slate-800 flex flex-col gap-2.5 text-xs sm:text-sm"
           >
             <div class="flex items-center justify-between text-slate-300">
               <span class="text-slate-500">Location:</span>
