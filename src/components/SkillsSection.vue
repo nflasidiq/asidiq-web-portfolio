@@ -23,7 +23,6 @@ const skillCategories = [
       { name: "Node.js", level: "Basic/Intermediate" },
       { name: "RESTful API Integration", level: "Intermediate" },
       { name: "PostgreSQL / MySQL", level: "Intermediate" },
-      { name: "JSON", level: "Intermediate" },
     ],
   },
   {
@@ -84,14 +83,9 @@ const skillCategories = [
               <div
                 v-for="skill in cat.skills"
                 :key="skill.name"
-                class="flex items-center justify-between gap-2 w-full px-3 py-2 rounded-xl bg-slate-950/70 border border-slate-800/90 hover:border-emerald-500/30 transition-all text-xs"
+                class="flex items-center bg-emerald-950/50 justify-between gap-2 w-full px-3 py-2 rounded-xl border border-slate-800/90 hover:border-emerald-500/30 transition-all text-xs"
               >
-                <span class="font-medium text-slate-200">{{ skill.name }}</span>
-                <span
-                  class="text-[11px] font-semibold text-emerald-400 bg-emerald-950/50 border border-emerald-900/40 px-2 py-0.5 rounded-md"
-                >
-                  {{ skill.level }}
-                </span>
+                <span class="font-medium text-emerald-400">{{ skill.name }}</span>
               </div>
             </div>
           </div>
