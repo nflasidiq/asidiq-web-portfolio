@@ -15,7 +15,7 @@ const techStack = [
 ];
 
 // Path ke file CV
-const cvPath = "/cv/CV-Frontend Developer-Naufal Asidiq.pdf";
+const cvPath = "/cv/CV_ATS_Naufal_Asidiq_Front-End_Developer.pdf";
 
 const downloadAndOpenCV = () => {
   // 1. Buka CV di tab baru
